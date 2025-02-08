@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: defi
+      POSTGRES_USER: /run/secrets/db_user
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_user
+      - db_password
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  clickhouse:
+    image: yandex/clickhouse-server
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+
+  app:
+    build: .
+    environment:
+      - SECRET_KEY=/run/secrets/secret_key
+    secrets:
+      - secret_key
+    ports:
+      - "8000:8000"
+
+secrets:
+  db_user:
+    file: ./secrets/db_user.txt
+  db_password:
+    file: ./secrets/db_password.txt
+  secret_key:
+    file: ./secrets/secret_key.txt
