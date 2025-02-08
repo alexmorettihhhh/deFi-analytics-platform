@@ -48,7 +48,6 @@ POSTGRES_DB=defi
 pip install -r requirements.txt
 ```
 
-
 **Установите все зависимости:**
 ```
 pip install -r requirements.txt
@@ -65,16 +64,16 @@ docker-compose up --build
 http://localhost:8000
 
 ```
-*API
-```
+## API
 
-POST /register - Регистрация нового пользователя.
-POST /login - Логин пользователя и получение JWT токена.
-GET /reports/{pair} - Генерация отчетов для указанного торгового Pair (например, ETH-USDT).
-WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
-POST /signals - Отправка торговых сигналов на Email или Telegram.
 
-```
+-POST /register - Регистрация нового пользователя.
+-POST /login - Логин пользователя и получение JWT токена.
+-GET /reports/{pair} - Генерация отчетов для указанного торгового Pair (например, ETH-USDT).
+-WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
+-POST /signals - Отправка торговых сигналов на Email или Telegram.
+
+
 
 ## Примечания
 # Для получения данных о транзакциях используется интеграция с внешними блокчейн-сервисами (например, Uniswap).
