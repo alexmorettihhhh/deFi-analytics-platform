@@ -33,8 +33,34 @@
    ```bash
    cd deFi-analytics-platform
     ```
+3. Создайте файл .env в корневой папке проекта и добавьте в него ваши секретные ключи и данные для подключения к базе данных:
+   ```bash
+   SECRET_KEY=your-generated-secret-key
+   POSTGRES_USER=your-db-user
+   POSTGRES_PASSWORD=your-db-password
+   POSTGRES_DB=defi
+    ```
+4. Установите все зависимости:
+   ```bash
+   pip install -r requirements.txt
+    ```
+5. Для запуска Docker-контейнеров используйте::
+   ```bash
+   docker-compose up --build
+    ```
+6. После этого приложение будет доступно по адресу:
+   ```bash
+   pip install -r requirements.txt](http://localhost:8000)
+    ```
 
+## API
+ 
+- ** 1. POST /register - Регистрация нового пользователя.
+- ** 2. POST /login - Логин пользователя и получение JWT токена.
+- ** 3. GET /reports/{pair} - Генерация отчетов для указанного торгового Pair (например, ETH-USDT).
+- ** 4. WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
+- ** 5. POST /signals - Отправка торговых сигналов на Email или Telegram.
 
-
+## Примечания
 
 
