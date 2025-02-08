@@ -12,3 +12,4 @@ jose
 passlib
 celery 
 redis
+python-telegram-bot
