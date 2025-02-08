@@ -7,6 +7,12 @@ app = FastAPI()
 # Используем безопасные хосты
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
+
+@app.get("/trade/{pair}")
+async def get_trade(pair: str):
+    data = get_trade_data(pair)
+    return data
+
 # Подключаем все роутеры
 app.include_router(auth.router)
 app.include_router(endpoints.router)

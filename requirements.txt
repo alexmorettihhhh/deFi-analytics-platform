@@ -10,3 +10,5 @@ psycopg2
 python-dotenv
 jose
 passlib
+celery 
+redis
