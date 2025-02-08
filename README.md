@@ -27,7 +27,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/yourusername/deFi-analytics-platform.git
+   git clone github.com/alexmorettihhhh/deFi-analytics-platform.git
     ```
 2. Клонируйте репозиторий:
    ```bash
