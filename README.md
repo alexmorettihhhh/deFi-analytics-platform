@@ -26,6 +26,7 @@
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
+<<<<<<< HEAD
    
 git clone https://github.com/yourusername/deFi-analytics-platform.git
 
@@ -62,3 +63,51 @@ POST /login - Логин пользователя и получение JWT то
 GET /reports/{pair} - Генерация отчетов для указанного торгового Pair (например, ETH-USDT).
 WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
 POST /signals - Отправка торговых сигналов на Email или Telegram.
+=======
+   ```bash
+   git clone github.com/alexmorettihhhh/deFi-analytics-platform.git
+    ```
+2. Клонируйте репозиторий:
+   ```bash
+   cd deFi-analytics-platform
+    ```
+3. Создайте файл .env в корневой папке проекта и добавьте в него ваши секретные ключи и данные для подключения к базе данных:
+   ```bash
+   SECRET_KEY=your-generated-secret-key
+   POSTGRES_USER=your-db-user
+   POSTGRES_PASSWORD=your-db-password
+   POSTGRES_DB=defi
+    ```
+4. Установите все зависимости:
+   ```bash
+   pip install -r requirements.txt
+    ```
+5. Для запуска Docker-контейнеров используйте::
+   ```bash
+   docker-compose up --build
+    ```
+6. После этого приложение будет доступно по адресу:
+   ```bash
+   (http://localhost:8000)
+    ```
+
+## API
+ 
+- **1. POST /register - Регистрация нового пользователя.
+- **2. POST /login - Логин пользователя и получение JWT токена.
+- **3. GET /reports/{pair} - Генерация отчетов для указанного торгового Pair (например, ETH-USDT).
+- **4. WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
+- **5. POST /signals - Отправка торговых сигналов на Email или Telegram.
+
+## Примечания
+- Для получения данных о транзакциях используется интеграция с внешними блокчейн-сервисами (например, Uniswap).
+- Уведомления о торговых сигналах могут быть настроены через Telegram или Email API.
+- Проект контейнеризован с помощью Docker для удобства деплоя и управления зависимостями.
+
+
+### Дополнительные рекомендации:
+- Убедитесь, что вы обновили все ключевые данные, такие как `SECRET_KEY`, учетные данные для базы данных и прочее, в `.env` файле перед запуском.
+
+## Лицензия
+Этот проект использует лицензию MIT. Подробности см. в файле LICENSE.
+>>>>>>> 104a85eaffd6a543ac27b49c9f6cb66682cf87de
