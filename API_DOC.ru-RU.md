@@ -231,13 +231,13 @@ ws.run_forever()
    curl -X GET "https://api.defi-analytics-platform.com/v1/signal?pair=ETH-USDT&threshold=5.0" \
         -H "Authorization: Bearer YOUR_API_KEY"
     ```
-- 2.Получение баланса:
-```json
+- 2. Получение баланса:
+```bash
 curl -X GET "https://api.defi-analytics-platform.com/v1/balance?address=0x1234567890abcdef&blockchain=ethereum" \
      -H "Authorization: Bearer YOUR_API_KEY"
 ```
-- 2.Получение баланса:
-```json
+- 2. Получение баланса:
+```bash
 curl -X POST "https://api.defi-analytics-platform.com/v1/transaction" \
      -H "Content-Type: application/json" \
      -d '{
