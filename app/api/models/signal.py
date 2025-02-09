@@ -1,5 +1,5 @@
 import requests
-from typing import List
+import logging
 
 def send_trade_signal(signal: str, chat_id: str, token: str):
     """Отправка торгового сигнала через Telegram"""
@@ -8,8 +8,15 @@ def send_trade_signal(signal: str, chat_id: str, token: str):
         "chat_id": chat_id,
         "text": signal
     }
-    response = requests.post(url, data=data)
-    return response.json()
+    try:
+        response = requests.post(url, data=data)
+        if response.status_code != 200:
+            logging.error(f"Ошибка при отправке сигнала: {response.status_code} - {response.text}")
+            return {"error": "Failed to send signal"}
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Ошибка при отправке сигнала: {e}")
+        return {"error": "Failed to send signal"}
 
 def generate_trade_signal(price_change: float, threshold: float) -> str:
     """Генерация торгового сигнала на основе изменения цены"""

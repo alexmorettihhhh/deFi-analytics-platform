@@ -7,7 +7,10 @@ logging.basicConfig(filename='audit_log.log', level=logging.INFO,
 
 def log_action(action: str):
     """Функция для записи действия в журнал"""
-    logging.info(action)
+    try:
+        logging.info(action)
+    except Exception as e:
+        logging.error(f"Ошибка при записи лога: {e}")
 
 def log_balance_change(address: str, old_balance: str, new_balance: str):
     """Логирование изменений баланса"""

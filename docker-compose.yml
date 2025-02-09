@@ -25,10 +25,15 @@ services:
     build: .
     environment:
       - SECRET_KEY=/run/secrets/secret_key
+      - ALLOWED_HOST=yourdomain.com  # Указать конкретные домены
     secrets:
       - secret_key
     ports:
       - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
 
 secrets:
   db_user:
