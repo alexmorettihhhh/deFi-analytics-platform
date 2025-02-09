@@ -25,7 +25,7 @@
 
 ---
 
-- ### 1. ** Get Trading Signal**
+- ### 1. **Get Trading Signal**
 
 - #### Endpoint: `/signal`
 
