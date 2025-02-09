@@ -65,6 +65,8 @@ http://localhost:8000
 - **4. WebSocket /ws/{pair} - Получение данных о торговом Pair в реальном времени.
 - **5. POST /signals - Отправка торговых сигналов на Email или Telegram.
 
+## API Documentation
+Подробную документацию по API можно найти в файле [API_DOC.md](./API_DOC.md).
 
 
 ## Примечания
@@ -78,4 +80,4 @@ http://localhost:8000
 
 ## Лицензия
 Этот проект использует лицензию MIT. Подробности см. в файле LICENSE.
->>>>>>> 104a85eaffd6a543ac27b49c9f6cb66682cf87de
+
