@@ -148,9 +148,9 @@
 
 - Параметры тела:
 
-`contract_address` (string) — Адрес смарт-контракта.
-`event_type` (string) — Тип события, на который нужно подписаться (например, `Transfer`, `Approval`).
-#### Ответ:
+- `contract_address` (string) — Адрес смарт-контракта.
+- `event_type` (string) — Тип события, на который нужно подписаться (например, `Transfer`, `Approval`).
+ #### Ответ:
 ```json
 {
   "status": "subscribed",
