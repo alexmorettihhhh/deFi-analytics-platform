@@ -73,7 +73,75 @@
 
 #### Параметры запроса:
 
-`blockchain (string) — Блокчейн для анализа (например, ethereum, polygon). `
+`blockchain` (string) — Блокчейн для анализа (например, `ethereum`, `polygon`).
+
+#### Ответ:
+```json
+{
+  "blockchain": "ethereum",
+  "data": {
+    "total_transactions": 1234567,
+    "total_volume": "5000000",
+    "active_addresses": 12000
+  }
+}
+```
+### 4. Получить События Из Смарт-Контракта
+
+Эндпоинт: `/events`
+Метод: `GET`
+
+Описание: Этот эндпоинт извлекает события (логи) из указанного смарт-контракта на выбранном блокчейне.
+
+Параметры запроса:
+
+`contract_address` (string) — Адрес смарт-контракта.
+`blockchain` (string) — Блокчейн (например, `ethereum`, `polygon`, `bsc`).
+`from_block` (number) — Начальный блок для извлечения событий (необязательный).
+`to_block` (number) — Конечный блок для извлечения событий (необязательный).
+#### Ответ:
+```json
+{
+  "events": [
+    {
+      "event_type": "Transfer",
+      "data": "0xabcdef123456...",
+      "block_number": 1234567
+    },
+    {
+      "event_type": "Approval",
+      "data": "0xabcdef987654...",
+      "block_number": 1234568
+    }
+  ]
+}
+```
+### 5. Отправить Транзакцию
+
+Эндпоинт: `/transaction`
+Метод: `POST`
+
+Описание: Этот эндпоинт позволяет отправить транзакцию в смарт-контракт (например, вызвать функцию контракта для взаимодействия).
+
+Параметры тела:
+`from_address` (string) — Адрес отправителя транзакции.
+`to_address` (string) — Адрес смарт-контракта.
+`private_key` (string) — Приватный ключ отправителя для подписания транзакции.
+`amount` (number) — Сумма токенов для отправки.
+`function` (string) — Название функции контракта (например,`transfer`, `approve`).
+Ответ:
+
+```json
+{
+  "transaction_hash": "0xabcdef123456...",
+  "status": "success",
+  "message": "Transaction sent successfully"
+}
+```
+
+
+
+
 
 
 
