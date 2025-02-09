@@ -226,17 +226,17 @@ ws.run_forever()
 ```
 ### Пример использования API
 
-- 1. **Получение торгового сигнала**:
+- 1.**Получение торгового сигнала**:
    ```bash
    curl -X GET "https://api.defi-analytics-platform.com/v1/signal?pair=ETH-USDT&threshold=5.0" \
         -H "Authorization: Bearer YOUR_API_KEY"
     ```
-- 2. Получение баланса:
+- 2.Получение баланса:
 ```bash
 curl -X GET "https://api.defi-analytics-platform.com/v1/balance?address=0x1234567890abcdef&blockchain=ethereum" \
      -H "Authorization: Bearer YOUR_API_KEY"
 ```
-- 2. Получение баланса:
+- 3.Получение баланса:
 ```bash
 curl -X POST "https://api.defi-analytics-platform.com/v1/transaction" \
      -H "Content-Type: application/json" \
@@ -249,13 +249,6 @@ curl -X POST "https://api.defi-analytics-platform.com/v1/transaction" \
      }'
 ```
   
-### Установка и запуск бота:
-
-1. Установите все зависимости:
-```bash
-pip install -r requirements.txt
-```
-
 ### Валидация и формат данных
 
 - Параметры запроса и тела должны быть переданы в формате JSON.
