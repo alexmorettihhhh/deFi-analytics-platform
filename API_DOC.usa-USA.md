@@ -184,4 +184,4 @@ Example:
 }
 ```
 ### Conclusion
--This API allows you to integrate with the DeFi Analytics Platform to analyze blockchain data, receive trading signals, monitor smart contracts, and interact with decentralized financial platforms. You can easily extend your capabilities by using the provided endpoints to retrieve and send data in real time.
+- This API allows you to integrate with the DeFi Analytics Platform to analyze blockchain data, receive trading signals, monitor smart contracts, and interact with decentralized financial platforms. You can easily extend your capabilities by using the provided endpoints to retrieve and send data in real time.
