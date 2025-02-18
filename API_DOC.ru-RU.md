@@ -170,6 +170,102 @@
   }
 }
 ```
+### Использование WebSocket API
+
+WebSocket API используется для получения данных о торговых парах в реальном времени. Это позволяет пользователю отслеживать изменения цен, объемы торгов и другие данные без необходимости выполнять регулярные запросы.
+
+#### Эндпоинт: `/ws/{pair}`
+**Метод**: `GET`
+
+- **Описание**: Соединение с WebSocket для получения данных в реальном времени для торговой пары (например, `ETH-USDT`).
+
+**Пример запроса**:
+```bash
+wss://api.defi-analytics-platform.com/ws/ETH-USDT
+```
+#### Ответ:
+```json
+{
+  "pair": "ETH-USDT",
+  "price": "4000.50",
+  "volume": "12345.67",
+  "timestamp": "2025-02-09T14:30:00Z"
+}
+```
+### 4. **Инструкции по настройке WebSocket сервера**
+Дополнительно можно предоставить информацию о том, как пользователи могут настроить WebSocket-соединение для получения данных о торговых сигналах, например, через Python или JavaScript.
+
+#### Пример (для Python):
+
+```markdown
+### Пример использования WebSocket с Python:
+
+```python
+import websocket
+import json
+
+def on_message(ws, message):
+    data = json.loads(message)
+    print(f"New data: {data}")
+
+def on_error(ws, error):
+    print(f"Error: {error}")
+
+def on_close(ws, close_status_code, close_msg):
+    print("### closed ###")
+
+def on_open(ws):
+    print("WebSocket opened")
+    
+ws = websocket.WebSocketApp("wss://api.defi-analytics-platform.com/ws/ETH-USDT",
+                            on_message=on_message,
+                            on_error=on_error,
+                            on_close=on_close)
+ws.on_open = on_open
+ws.run_forever()
+```
+### Пример использования API
+
+- 1.**Получение торгового сигнала**:
+   ```bash
+   curl -X GET "https://api.defi-analytics-platform.com/v1/signal?pair=ETH-USDT&threshold=5.0" \
+        -H "Authorization: Bearer YOUR_API_KEY"
+    ```
+- 2.Получение баланса:
+```bash
+curl -X GET "https://api.defi-analytics-platform.com/v1/balance?address=0x1234567890abcdef&blockchain=ethereum" \
+     -H "Authorization: Bearer YOUR_API_KEY"
+```
+- 3.Получение баланса:
+```bash
+curl -X POST "https://api.defi-analytics-platform.com/v1/transaction" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "from_address": "0x1234567890abcdef",
+       "to_address": "0xabcdef1234567890",
+       "private_key": "YOUR_PRIVATE_KEY",
+       "amount": 10.0,
+       "function": "transfer"
+     }'
+```
+  
+### Валидация и формат данных
+
+- Параметры запроса и тела должны быть переданы в формате JSON.
+- Для числовых значений, таких как `threshold`, `amount`, допустимы только положительные числа.
+- Адреса блокчейнов (например, `address`, `contract_address`) должны быть в формате строк, соответствующем стандартам адресов для соответствующих блокчейнов (например, для Ethereum — строка длиной 42 символа, начинающаяся с `0x`).
+
+#### Пример ошибки:
+
+```json
+{
+  "error": {
+    "code": 422,
+    "message": "Invalid address format. Expected format: 0x... for Ethereum addresses."
+  }
+}
+```
+
 
 ### Лимитирование Запросов
 - API использует лимитирование для предотвращения злоупотреблений. Каждый пользователь может сделать до 1000 запросов в час. Если лимит превышен, будет возвращен ответ `429 Too Many Requests.`
@@ -184,6 +280,25 @@
   }
 }
 ```
+
+### Ошибки
+
+#### 400 Bad Request
+- Произошла ошибка в запросе. Обычно это связано с отсутствием обязательных параметров или неверным их форматом.
+
+#### 401 Unauthorized
+- Ошибка авторизации. Убедитесь, что вы передаете правильный API-ключ в заголовке `Authorization`.
+
+#### 422 Unprocessable Entity
+- Ошибка валидации данных. Например, если передан неправильный формат адреса.
+
+#### 429 Too Many Requests
+- Превышен лимит запросов (1000 запросов в час).
+
+#### 500 Internal Server Error
+- Ошибка на сервере. Если ошибка продолжает возникать, обратитесь в службу поддержки.
+
+
 ### Заключение
 - Это API позволяет вам интегрироваться с DeFi Analytics Platform, анализировать данные блокчейнов, получать торговые сигналы, отслеживать смарт-контракты и взаимодействовать с децентрализованными финансовыми платформами. Вы можете легко расширять возможности платформы, - используя предоставленные эндпоинты для получения и отправки данных в реальном времени.
 

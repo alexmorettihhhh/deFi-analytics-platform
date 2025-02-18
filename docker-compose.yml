@@ -4,16 +4,21 @@ services:
     image: postgres:13
     environment:
       POSTGRES_DB: defi
-      POSTGRES_USER: /run/secrets/db_user
-      POSTGRES_PASSWORD: /run/secrets/db_password
-    secrets:
-      - db_user
-      - db_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - defi-network
 
   redis:
-    image: redis:alpine
+    image: redis:6
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - defi-network
 
   clickhouse:
     image: yandex/clickhouse-server
@@ -23,17 +28,58 @@ services:
 
   app:
     build: .
-    environment:
-      - SECRET_KEY=/run/secrets/secret_key
-      - ALLOWED_HOST=yourdomain.com  # Указать конкретные домены
-    secrets:
-      - secret_key
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/defi_analytics
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ENVIRONMENT=development
+      - SENTRY_DSN=${SENTRY_DSN}
+    volumes:
+      - ./app:/app
+    networks:
+      - defi-network
     depends_on:
       - postgres
       - redis
       - clickhouse
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - defi-network
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - defi-network
+
+  frontend:
+    build:
+      context: ./defi-analytics-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - app
+    networks:
+      - defi-network
 
 secrets:
   db_user:
@@ -42,3 +88,13 @@ secrets:
     file: ./secrets/db_password.txt
   secret_key:
     file: ./secrets/secret_key.txt
+
+networks:
+  defi-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
