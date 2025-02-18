@@ -54,7 +54,7 @@
 
 1. Клонируйте репозиторий:
  ```
-git clone https://github.com/yourusername/deFi-analytics-platform.git
+git clone https://github.com/alexmorettihhhh/deFi-analytics-platform.git
  ```
 
 **Перейдите в директорию проекта:**
